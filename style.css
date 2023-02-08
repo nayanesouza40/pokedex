@@ -124,6 +124,14 @@
 
 .pokemon-card > .pokemon-infos > .pokemon-types {
     margin: .3rem 0;
+    padding: .2rem;
+    font-size: .9rem;
+}
+
+.tp {
+    background-color: rgba(255, 255, 255, .2);
+    padding: .2rem .3rem;
+    border-radius: .3rem;
 }
 
 .pokemon-card > .pokemon-img {

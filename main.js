@@ -24,8 +24,8 @@ const getAllPokemonData = async () => {
         pokemonElement.classList.add("pokemon-flex");
         pokemonElement.classList.add("col-2")
 
-        let [tipo1, tipo2] = pokemonData.types.map(type => type.type.name)
-        if (tipo2 == undefined) {tipo2 = ''}
+        let [tipo1, tipo2] = pokemonData.types.map(type => type.type.name);
+        
 
         if(tipo1 == 'bug') {
             cor = '#9DC130';
@@ -65,13 +65,21 @@ const getAllPokemonData = async () => {
             cor = '#559EDF'
         }
 
+        tipo1= `<span class="tp">${tipo1}</span>`;
+
+        if (tipo2 == undefined) {
+            tipo2 = ''} else {
+                tipo2= `<span class="tp">${tipo2}</span>`;
+            }
+
+
         pokemonElement.innerHTML = `
             <div class="pokemon-card" style="background-color:${cor}">
                 <p class="pokemon-number">${pokemonData.id}</p>
                 <div class="pokemon-infos">
                     <p class="pokemon-name">${pokemon.name}</p>
                     <p class="pokemon-types">${tipo1}</p>
-                    <p class="pokemon-types" class="tipo2">${tipo2}</p>
+                    <p class="pokemon-types">${tipo2}</p>
                 </div>           
                 <img class="pokemon-img" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonData.id}.png"/>                
             </div>   
