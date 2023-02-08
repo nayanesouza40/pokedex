@@ -1,0 +1,128 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+[class*="col-"] {
+    width: 100%;
+}
+
+@media only screen and (max-width: 767px) {
+    .col-1 {width: 100%;}
+    .col-2 {width: 50%;}
+    .col-3 {width: 100%;margin: 0 auto;}
+} 
+
+@media only screen and (min-width: 768px) and (max-width: 1023px) {
+    .col-1 {width: 100%;}
+    .col-2 {width: 25%;}
+    .col-3 {width: 80%;margin: 0 auto;}
+}
+
+@media only screen and (min-width: 1024px) {
+    .col-1 {width: 100%;}
+    .col-2 {width: 25%;}
+    .col-3 {width: 60%;margin: 0 auto;}
+} 
+
+/*
+    col-1: tela total
+    col-2: pokemon card
+    col-3: delimita o centro da tela
+*/
+
+.pokemon-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: .4rem;
+    margin: 0 auto;
+}
+
+.pokemon-flex {
+    padding: .6rem;;
+}
+
+/*cabeçalho*/
+
+.header {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: 1rem;
+}
+
+.search {
+    background-color: lightblue;
+    padding: .6rem;
+    border-radius: .5rem;
+    display: flex;
+}
+
+.search input[type='text'] {
+    width: 80%;
+    border: 0;
+    background-color: transparent;
+    color: #fff;
+}
+
+.search input[type='text']:focus {
+    outline: none;
+}
+
+.search input[type='text']::placeholder {
+    color: #efefef;
+}
+
+.search button[type='submit'] {
+    background-color: transparent;
+    border: 0;
+}
+
+.icon {
+    margin-right: .6rem;
+    padding-top: .2rem;
+    margin-left: .2rem;
+}
+
+/*pokemon card*/
+
+.pokemon-card {
+    width: 100%;
+    padding: 0;
+    border-radius: .6rem;
+    height: 7rem;
+}
+
+.pokemon-card > .pokemon-number {
+    margin: .7rem 1rem;
+    text-align: right;
+    width: 3rem;
+    float: right;
+    color: #fff;
+}
+
+.pokemon-card > .pokemon-infos {
+    width: 20%;
+    height: 100%;
+    padding-left: .8rem;
+    padding-top: 1rem;
+    float: left;
+    position: relative;
+    color: #fff;
+}
+
+.pokemon-card > .pokemon-infos > .pokemon-name {
+    margin-bottom: .5rem;
+    text-transform: capitalize;
+}
+
+.pokemon-card > .pokemon-infos > .pokemon-types {
+    margin: .3rem 0;
+}
+
+.pokemon-card > .pokemon-img {
+    float: right;
+    margin-top: -1.5rem;
+}
