@@ -29,6 +29,14 @@
     .col-3 {width: 80%;margin: 0 auto;}
 }
 
+@media only screen and (min-width: 768px) and (max-width: 1023px) and (orientation: landscape) {
+    html {transform: rotate(-90deg)}    
+    .col-1 {width: 100%;}
+    .col-2 {width: 25%;}
+    .col-3 {width: 80%;margin: 0 auto;}
+}
+
+
 @media only screen and (min-width: 1024px) {
     .col-1 {width: 100%;}
     .col-2 {width: 25%;}
@@ -52,51 +60,6 @@
 .pokemon-flex {
     padding: .6rem;;
 }
-
-/*cabeçalho*/
-
-/*
-
-.header {
-    padding-left: 1rem;
-    padding-right: 1rem;
-    padding-top: 1rem;
-}
-
-.search {
-    background-color: lightblue;
-    padding: .6rem;
-    border-radius: .5rem;
-    display: flex;
-}
-
-.search input[type='text'] {
-    width: 80%;
-    border: 0;
-    background-color: transparent;
-    color: #fff;
-}
-
-.search input[type='text']:focus {
-    outline: none;
-}
-
-.search input[type='text']::placeholder {
-    color: #efefef;
-}
-
-.search button[type='submit'] {
-    background-color: transparent;
-    border: 0;
-}
-
-.icon {
-    margin-right: .6rem;
-    padding-top: .2rem;
-    margin-left: .2rem;
-}
-
-*/
 
 /*pokemon card*/
 
@@ -129,6 +92,11 @@
 .pokemon-card > .pokemon-infos > .pokemon-name {
     margin-bottom: .5rem;
     text-transform: capitalize;
+}
+
+.pokemon-card > .pokemon-infos > a {
+    text-decoration: none;
+    color: #fff;
 }
 
 .pokemon-card > .pokemon-infos > .pokemon-types {

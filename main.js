@@ -74,7 +74,7 @@ const getAllPokemonData = async () => {
             <div class="pokemon-card" style="background-color:${cor}">
                 <p class="pokemon-number">${pokemonData.id}</p>
                 <div class="pokemon-infos">
-                    <p class="pokemon-name">${pokemon.name}</p>
+                    <p class="pokemon-name"><a>${pokemon.name}</a></p>
                     <p class="pokemon-types">${tipo1}</p>
                     <p class="pokemon-types">${tipo2}</p>
                 </div>           
@@ -84,5 +84,7 @@ const getAllPokemonData = async () => {
         pokemonContainer.appendChild(pokemonElement);
     });
 }
-    
-displayAllPokemonData()
+
+displayAllPokemonData();
+
+
