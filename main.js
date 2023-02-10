@@ -12,7 +12,6 @@ const getAllPokemonData = async () => {
 
     let cor = 'lightblue';
 
-    
     const displayAllPokemonData = async () => {
     const pokemonList = await getAllPokemonData();
     const pokemonContainer = document.getElementById("pokemon-container");
@@ -25,7 +24,6 @@ const getAllPokemonData = async () => {
         pokemonElement.classList.add("col-2")
 
         let [tipo1, tipo2] = pokemonData.types.map(type => type.type.name);
-        
 
         if(tipo1 == 'bug') {
             cor = '#9DC130';
@@ -72,7 +70,6 @@ const getAllPokemonData = async () => {
                 tipo2= `<span class="tp">${tipo2}</span>`;
             }
 
-
         pokemonElement.innerHTML = `
             <div class="pokemon-card" style="background-color:${cor}">
                 <p class="pokemon-number">${pokemonData.id}</p>
@@ -84,7 +81,6 @@ const getAllPokemonData = async () => {
                 <img class="pokemon-img" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonData.id}.png"/>                
             </div>   
             `
-    
         pokemonContainer.appendChild(pokemonElement);
     });
 }
