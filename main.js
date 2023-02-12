@@ -22,27 +22,36 @@ const getPokemonInfo = async (pokemonName) => {
   
     let [tipo1, tipo2] = pokemonData.types.map(type => type.type.name);
 
+    let cor = tipo1;
+
     if (tipo2 == undefined) {
-        tipo2 = ''}
+        tipo2 = ''} else {
+            tipo2= `<span class="tp">${tipo2}</span>`;
+        }
+
+        tipo1= `<span class="tp">${tipo1}</span>`;
 
     let [habilidade1, habilidade2] = pokemonData.abilities.map(ability => ability.ability.name);
-  
+
     const pokemonContainer = document.getElementById("pokemon-container");
     const pokemonElement = document.createElement("div");
     pokemonElement.classList.add("pokemon-escuro");
 
     pokemonElement.innerHTML = `
-        <div class="pokemon-pop" style="background-color:${whatsColor(tipo1)}">
-            <p onClick="clearPokemon()">x</p>
+        <div class="pokemon-pop" style="background-color:${whatsColor(cor)}">
+            <p onClick="clearPokemon()" class="x">x</p>
             <img class="pokemon-img" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonData.id}.png"/>   
-            <p>${pokemonData.id}</p>
-            <p>${pokemonName}</p>
-            <p>${tipo1}</p>
-            <p>${tipo2}</p>
+            <p class="pokemon-number">${pokemonData.id}</p>
+            <p class="pokemon-name">${pokemonName}</p>
+            <div class="types">
+                <p class="pokemon-types">${tipo1}</p>
+                <p class="pokemon-types">${tipo2}</p>
+            </div>
             <p>${habilidade1}</p>
             <p>${habilidade2}</p>
         </div>
     `
+
     pokemonContainer.appendChild(pokemonElement);
 
   }
