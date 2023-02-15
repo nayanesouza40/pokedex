@@ -11,8 +11,25 @@
     <title>Pokedex v.4</title>
 </head>
 <body>
-
+    
     <div class="col-3">
+        <div id="busca">
+            <form id="form">
+                <input type="text" name="busca" id="input-busca" placeholder="digite o nome do Pokemon"/>
+                <button type="submit">Ok</button>
+            </form>
+        </div>
+
+        <div id="filtros">
+            <label for="tipos">Tipos:</label>
+            <select name="tipos" id="tipos">
+                <option value="all">Todos</option>
+                <option value="grass">Grass</option>
+                <option value="poison">Poison</option>
+                <option value="bug">Bug</option>
+            </select>
+        </div>
+
         <div class="col-1 pokemon-container" id="pokemon-container"></div>      
     </div> 
   
