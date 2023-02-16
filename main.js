@@ -45,7 +45,7 @@ const whatsColor = (color) => {
             cor = '#F87C7A'
         } else if (color == 'rock') {
             cor = '#CEC18C'
-        } else if (color == 'stell') {
+        } else if (color == 'steel') {
             cor = '#5596A4'
         } else if (color == 'water') {
             cor = '#559EDF'
@@ -65,47 +65,7 @@ const deuMerda = (error) => {
     `;
 }
 
-// busca todos os pokemons pelo tipo
-const displayTypesPokemonData = async (url) => {
-
-    const pokemonList = await getAllPokemonData(url);
-    const pokemonContainer = document.getElementById("pokemon-container");
-    
-    pokemonList.forEach(async pokemon => {
-        const pokemonData = await fetch(pokemon.url).then(res => res.json());
-      
-        const pokemonElement = document.createElement("div");
-        pokemonElement.classList.add("pokemon-flex");
-        pokemonElement.classList.add("col-2");
-
-        let [tipo1, tipo2] = pokemonData.types.map(type => type.type.name);
-
-        let color = tipo1;
-
-        tipo1= `<span class="tp">${tipo1}</span>`;
-
-        if (tipo2 == undefined) {
-            tipo2 = ''} else {
-                tipo2= `<span class="tp">${tipo2}</span>`;
-            }
-
-        pokemonElement.innerHTML = `
-            <div class="pokemon-card" style="background-color:${whatsColor(color)}" onClick="getPokemonInfo('${pokemon.name}');
-            ">
-                <p class="pokemon-number">${pokemonData.id}</p>
-                <div class="pokemon-infos">
-                    <a class="${pokemon.name} pokemon-name">${pokemon.name}</a>
-                    <p class="pokemon-types">${tipo1}</p>
-                    <p class="pokemon-types">${tipo2}</p>
-                </div>           
-                <img class="pokemon-img" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonData.id}.png"/>                
-            </div>   
-            `
-        pokemonContainer.appendChild(pokemonElement);
-    });
-}
-
-// busca todos os pokemons da primeira geração
+// busca todos os pokemons
 const displayAllPokemonData = async (url) => {
 
     const pokemonList = await getAllPokemonData(url);
@@ -113,7 +73,8 @@ const displayAllPokemonData = async (url) => {
     
     pokemonList.forEach(async pokemon => {
         const pokemonData = await fetch(pokemon.url).then(res => res.json());
-      
+        // função para exibir o tipo do pokemon
+      // colocar uma condicional aqui, se o tipo é aquele, e criar a div só se for
         const pokemonElement = document.createElement("div");
         pokemonElement.classList.add("pokemon-flex");
         pokemonElement.classList.add("col-2");
@@ -145,7 +106,7 @@ const displayAllPokemonData = async (url) => {
     });
 }
 
-// busca o pokemon pelo nome dele
+// busca o pokemon pelo nome dele - usada pelo campo de busca
 const getPokemonInfo = async (pokemonName) => {
     const pokemonContainer = document.getElementById("pokemon-container");
 
@@ -188,73 +149,96 @@ const clearPokemon = () => {
     const pokemonElement = document.querySelectorAll('.pokemon-flex');
     pokemonElement.forEach(div => div.parentNode.removeChild(div));
 }
+
+// busca todos os pokemons pelo tipo
+const displayAllPokemonType = async (tipo) => {
+
+    const pokemonList = await getAllPokemonData('https://pokeapi.co/api/v2/pokemon?limit=890');
+    const pokemonContainer = document.getElementById("pokemon-container");
     
-document.querySelector('#form').addEventListener('submit', (event) => {
-    event.preventDefault();
-    const busca = document.querySelector('#input-busca').value;
-    clearPokemon();    
+    pokemonList.forEach(async pokemon => {
+        const pokemonData = await fetch(pokemon.url).then(res => res.json());
+        let [tipo1, tipo2] = pokemonData.types.map(type => type.type.name);
+        
+        if ((tipo == tipo1) || (tipo == tipo2)) {
+            const pokemonElement = document.createElement("div");
+            pokemonElement.classList.add("pokemon-flex");
+            pokemonElement.classList.add("col-2");
 
-    console.log(tipo);
+            let color = tipo1;
 
-    if (busca == 0) {
-        displayAllPokemonData('https://pokeapi.co/api/v2/pokemon?limit=151') 
-    } else if (busca != 0) {
-        getPokemonInfo(busca);
-    } 
-})
+            tipo1= `<span class="tp">${tipo1}</span>`;
 
-const tipo = document.querySelector('#tipos').value;
-    displayAllPokemonData('https://pokeapi.co/api/v2/pokemon?limit=151');
+            if (tipo2 == undefined) {
+                tipo2 = ''} else {
+                    tipo2= `<span class="tp">${tipo2}</span>`;
+                }
 
-
-/*
-
-FUNÇÃO QUE EXIBI MAIS DETALHES SOBRE O POKEMON QUANDO CLICAR NA TELA
-
-const clearPokemon = () => {
-    const pokemonElement = document.querySelectorAll('.pokemon-escuro')
-    pokemonElement.forEach(div => div.parentNode.removeChild(div))
+            pokemonElement.innerHTML = `
+                <div class="pokemon-card" style="background-color:${whatsColor(color)}" onClick="getPokemonInfo('${pokemon.name}');
+                ">
+                    <p class="pokemon-number">${pokemonData.id}</p>
+                    <div class="pokemon-infos">
+                        <a class="${pokemon.name} pokemon-name">${pokemon.name}</a>
+                        <p class="pokemon-types">${tipo1}</p>
+                        <p class="pokemon-types">${tipo2}</p>
+                    </div>           
+                    <img class="pokemon-img" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonData.id}.png"/>                
+                </div>   
+                `
+            pokemonContainer.appendChild(pokemonElement);
+        }
+    });
 }
 
-const getPokemonInfo = async (pokemonName) => {
-    const pokemonData = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`)
-        .then(res => res.json())
-        .catch(error => console.error(error));
-  
-    let [tipo1, tipo2] = pokemonData.types.map(type => type.type.name);
+// eventos
+document.querySelector('#form').addEventListener('submit', (event) => {
+    event.preventDefault();
+    let busca = document.querySelector('#input-busca').value.toLowerCase();
+    clearPokemon();    
+    document.querySelector('#tipos').value = 'all';
+    document.querySelector('#geracao').value = 'all';
+    console.log(busca);
+    if (busca == '') {
+        displayAllPokemonData('https://pokeapi.co/api/v2/pokemon?limit=151') 
+    } else if (busca != '') {
+        getPokemonInfo(busca);
+        document.querySelector('#input-busca').value = '';
+    } 
+});
 
-    let cor = tipo1;
+document.querySelector('#geracao').addEventListener('click', () => {
+    document.querySelector('#geracao > .oculto').hidden = true;
+});
 
-    if (tipo2 == undefined) {
-        tipo2 = ''} else {
-            tipo2= `<span class="tp">${tipo2}</span>`;
-        }
+document.querySelector('#tipos').addEventListener('click', () => {
+    document.querySelector('#tipos > .oculto').hidden = true;
+});
 
-        tipo1= `<span class="tp">${tipo1}</span>`;
+document.querySelector('#geracao').addEventListener('change', () => {
+    let geracao = document.querySelector('#geracao').value;
+    clearPokemon();
+    if (geracao == 'all') {
+        displayAllPokemonData(`https://pokeapi.co/api/v2/pokemon?limit=890`);
+    } else {
+        displayAllPokemonData(`https://pokeapi.co/api/v2/pokemon?${geracao}`);
+    }
+    document.querySelector('#input-busca').value = '';
+    document.querySelector('#tipos').value = 'all';
+});
 
-    let [habilidade1, habilidade2] = pokemonData.abilities.map(ability => ability.ability.name);
 
-    const pokemonContainer = document.getElementById("pokemon-container");
-    const pokemonElement = document.createElement("div");
-    pokemonElement.classList.add("pokemon-escuro");
+document.querySelector('#tipos').addEventListener('change', () => {
+    let tipo = document.querySelector('#tipos').value;
+    clearPokemon();
+    if (tipo == 'all') {
+        displayAllPokemonData(`https://pokeapi.co/api/v2/pokemon?limit=890`);
+    } else {
+        displayAllPokemonType(tipo);
+    }
+    document.querySelector('#geracao').value = 'all';
+    document.querySelector('#input-busca').value = '';
+});
 
-    pokemonElement.innerHTML = `
-        <div class="pokemon-pop" style="background-color:${whatsColor(cor)}">
-            <p onClick="clearPokemon()" class="x">x</p>
-            <img class="pokemon-img" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonData.id}.png"/>   
-            <p class="pokemon-number">${pokemonData.id}</p>
-            <p class="pokemon-name">${pokemonName}</p>
-            <div class="types">
-                <p class="pokemon-types">${tipo1}</p>
-                <p class="pokemon-types">${tipo2}</p>
-            </div>
-            <p>${habilidade1}</p>
-            <p>${habilidade2}</p>
-        </div>
-    `
 
-    pokemonContainer.appendChild(pokemonElement);
-
-  }
-
-*/
+displayAllPokemonData('https://pokeapi.co/api/v2/pokemon?limit=151');
