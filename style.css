@@ -14,6 +14,13 @@
     .col-2 {width: 50%;}
     .col-3 {width: 100%;margin: 0 auto;}
     .pokemon-pop {width: 90%;}
+    #filtros {
+        padding: 1rem;
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        justify-content: space-between;
+    }
 } 
 
 @media only screen and (max-width: 767px) and (orientation: landscape) {
@@ -22,6 +29,13 @@
     .col-2 {width: 50%;}
     .col-3 {width: 100%;margin: 0 auto;}
     .pokemon-pop {width: 90%;}
+    #filtros {
+        padding: 1rem;
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        justify-content: space-between;
+    }
 } 
 
 
@@ -30,6 +44,13 @@
     .col-2 {width: 25%;}
     .col-3 {width: 80%;margin: 0 auto;}
     .pokemon-pop {width: 40%;}
+    #filtros {
+        padding: 1rem;
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        justify-content: space-between;
+    }
 }
 
 @media only screen and (min-width: 768px) and (max-width: 1023px) and (orientation: landscape) {
@@ -38,6 +59,13 @@
     .col-2 {width: 25%;}
     .col-3 {width: 80%;margin: 0 auto;}
     .pokemon-pop {width: 40%;}
+    #filtros {
+        padding: 1rem;
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        justify-content: space-between;
+    }
 }
 
 
@@ -46,6 +74,18 @@
     .col-2 {width: 25%;}
     .col-3 {max-width: 1024px;width: 60%;margin: 0 auto;}
     .pokemon-pop {width: 30%;}
+    #filtros {
+        padding: 1rem;
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+    }
+    #filtros > div {
+        margin-right: 1rem;
+    }
+    #form {
+        margin: 0 1rem;
+    }
 } 
 
 /*
@@ -158,13 +198,7 @@
     color: #fff;
 }
 
-#filtros {
-    padding: 1rem;
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    justify-content: space-between;
-}
+
 
 #filtros > div {
     display: flex;
@@ -172,6 +206,7 @@
     background-color: #F8A54F;
     font-size: .9rem;
     align-items: center;
+    max-width: 10rem;
     width: 47%;
     border-radius: .6rem;
 }
@@ -189,7 +224,8 @@
     outline: none;
 }
 
-#filtros > div > select > option {
-    border: 0;
-    border-radius: .6rem;
+.option {
+    width: .2rem;
+    height: .2rem;
+    background-color: #559EDF;
 }
